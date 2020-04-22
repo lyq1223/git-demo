@@ -4,88 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-from {
-            display: flex;
-            flex-direction: column;
-            max-width: 400px;
-        }
-
-        input[type="text"] {
-            border: 10px solid #f7f7f7;
-            padding: 10px;
-            outline: none;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 18px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1) inset;
-
-        }
-
-        ul {
-            list-style: none;
-
-        }
-
-        li {
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #d8d8d8;
-
-
-        }
-
-        li:nth-child(odd) {
-            transform: perspective(100px) rotateX(-3deg);
-
-        }
-
-        li:nth-child(even) {
-            transform: perspective(100px) rotateX(3deg);
-        }
-    </style>
 </head>
 
 <body>
-    <div class="search-from">
-        <input type="text" id="suggest">
-        <ul>
-            <li>filter by a city</li>
-            <li>or a state</li>
-        </ul>
-    </div>
+    <!-- 属性：action class -->
+    <!-- action表单提交到那里去 -->
+    <form action="http://www.baidu.com" class="from" name="myform">
+        <div>
+            <label for="userName">用户名：</label>
+            <input type="text" placeholder="输入用户名" id="userName" name="userName">
+        </div>
+        <div>
+            <label for="pwd">密码：</label>
+            <input type="text" placeholder="输入密码" id="userName" name="pwd">
+        </div>
+        <div>
+            <label for="repwd">确认密码：</label>
+            <input type="text" placeholder="再次输入密码" id="userName" name="repwd">
+        </div>
+        <div>
+            <label for="sex">性别：</label>
+            <input type="radio" value="nan" name="sex" id="nan" checked>
+            <label for="nan">男</label>
+
+            <input type="radio" value="nv" name="sex" id="nv">
+            <label for="nv">女</label>
+        </div>
+        <div>
+            <label for="hobby">爱好</label>
+            <select name="hobby" id="hobby">
+                <option value="dog">dog</option>
+                <option value="cat" selected>cat</option>
+
+            </select>
+        </div>
+        <button type="submit">提交</button>
+        <a href="http//www.baidu.com">baidu</a>
+        <div>
+            <span>用户名：123</span>
+            <span>密码：123</span>
+            <span>sex：123</span>
+            <span>hobby：123</span>
+        </div>
+    </form>
     <script>
-        let cities = [];
-        //fetch进行网络请求
-        fetch('https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2...25e2c6f6/cities.json')
-            .then(function (res) {
-                return res.json();
-            })
-            .then(function (data) {
-                console.log(data);
-                cities = data;
-            })
-        const suggest = document.getElementById('suggest');
-        function findMatch(e) {
-            let v = e.target.value;
-            console.log(v)
-            if (!v) return;
-            let suggestCity = cities
+        //从1 拿到form
+        //document.forms取到所有表单
+        const form = document.forms.myform
+        // console.log(form);
+        const hobby = form.hobby.value
+        // console.log(hobby);
+
+        form.addEventListener('submit', function (event) {
+            console.log('提交了');
+            //阻止html表单默认的特点/事件
+            event.preventDefault();
+            const userName = form.userName.value;
+            const pwd = form.pwd.value;
+            const repwd = form.repwd.value;
+            const sex = form.sex.value;
+            const hobby = form.hobby.value;
+            if (userName.trim().length === 0) {
+                alert('userName 不能为空')
+                return;
+            }
+            if (repwd.trim() !== pwd) {
+                alert('确认密码和密码不一致');
+                return;
+            }
+            // console.log(userName, pwd.repwd, sex, hobby);
+            const div = document.createElement('div');
+            div.innerHTML = `
+            <span>用户名：${userName}</span>
+            <span>密码：${pwd}</span>
+            <span>sex：${sex}</span>
+            <span>hobby：${hobby}</span>
+            `
+
+            document.body.appendChild(div)
 
 
-        }
-        suggest.addEventListener('keyup', findMatch)
+
+        })
 
     </script>
 </body>
