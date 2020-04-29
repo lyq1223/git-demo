@@ -4,92 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Vue.js实例</title>
 </head>
 
 <body>
-    <!-- 属性：action class -->
-    <!-- action表单提交到那里去 -->
-    <form action="http://www.baidu.com" class="from" name="myform">
-        <div>
-            <label for="userName">用户名：</label>
-            <input type="text" placeholder="输入用户名" id="userName" name="userName">
-        </div>
-        <div>
-            <label for="pwd">密码：</label>
-            <input type="text" placeholder="输入密码" id="userName" name="pwd">
-        </div>
-        <div>
-            <label for="repwd">确认密码：</label>
-            <input type="text" placeholder="再次输入密码" id="userName" name="repwd">
-        </div>
-        <div>
-            <label for="sex">性别：</label>
-            <input type="radio" value="nan" name="sex" id="nan" checked>
-            <label for="nan">男</label>
+    <h1>Vue2.0实例</h1>
+    <hr>
+    <ol>
+        <li><a href="./helloworld.html">Hello World 实例</a></li>
+    </ol>
 
-            <input type="radio" value="nv" name="sex" id="nv">
-            <label for="nv">女</label>
-        </div>
-        <div>
-            <label for="hobby">爱好</label>
-            <select name="hobby" id="hobby">
-                <option value="dog">dog</option>
-                <option value="cat" selected>cat</option>
-
-            </select>
-        </div>
-        <button type="submit">提交</button>
-        <a href="http//www.baidu.com">baidu</a>
-        <div>
-            <span>用户名：123</span>
-            <span>密码：123</span>
-            <span>sex：123</span>
-            <span>hobby：123</span>
-        </div>
-    </form>
-    <script>
-        //从1 拿到form
-        //document.forms取到所有表单
-        const form = document.forms.myform
-        // console.log(form);
-        const hobby = form.hobby.value
-        // console.log(hobby);
-
-        form.addEventListener('submit', function (event) {
-            console.log('提交了');
-            //阻止html表单默认的特点/事件
-            event.preventDefault();
-            const userName = form.userName.value;
-            const pwd = form.pwd.value;
-            const repwd = form.repwd.value;
-            const sex = form.sex.value;
-            const hobby = form.hobby.value;
-            if (userName.trim().length === 0) {
-                alert('userName 不能为空')
-                return;
-            }
-            if (repwd.trim() !== pwd) {
-                alert('确认密码和密码不一致');
-                return;
-            }
-            // console.log(userName, pwd.repwd, sex, hobby);
-            const div = document.createElement('div');
-            div.innerHTML = `
-            <span>用户名：${userName}</span>
-            <span>密码：${pwd}</span>
-            <span>sex：${sex}</span>
-            <span>hobby：${hobby}</span>
-            `
-
-            document.body.appendChild(div)
-
-
-
-        })
-
-    </script>
 </body>
 
 </html>
