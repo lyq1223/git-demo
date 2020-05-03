@@ -1,146 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      [v-cloak] {
-        display: none;
-      }
-    </style>
-    <!-- VUE的MVVM 响应式 数据驱动的界面 -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
-    <!-- Bootstrap 样式 布局 -->
-    <link
-      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css"
-      rel="stylesheet"
-    />
-    <!-- element-ui是vue + bootstrap -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <!-- vue最新版是3.0 typescript 来编写 -->
-    <!-- 使用引入式的vue -->
-    <div class="container">
-      <!-- col-md-6 col-md-offset-3 可以达到居中效果 -->
-      <div class="col-md-6 col-md-offset-3">
-        <h1>Hello Vue.js!</h1>
-      </div>
-      <div class="app">
-        <!-- {{title}} -->
-        <!-- MVVM的区域 -->
-        <table class="table table-hover" v-cloak>
-          <thead>
-            <tr>
-              <th class="text-right" @click="sortBy('id')">序号</th>
-              <th class="text-right" @click="sortBy('name')">姓名</th>
-              <th class="text-right" @click="sortBy('author')">作者</th>
-              <th class="text-right" @click="sortBy('price')">价格</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="book in books" :key="book.id">
-              <td class="text-right">{{book.id}}</td>
-              <td class="text-right">{{book.name}}</td>
-              <td class="text-right">{{book.author}}</td>
-              <td class="text-right">{{book.price}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- 如果要表单，使用 json到data book之中 -->
-        <div id="add-book">
-          <!-- legend是html标签， 用来解释form  -->
-          <legend>添加书籍</legend>
-          <div class="for-group">
-            <label>书名</label>
-            <!-- 双向绑定 -->
-            <input type="text" class="form-control" v-model="book.name" />
-          </div>
-          <div class="for-group">
-            <label>作者</label>
-            <!-- 双向绑定 -->
-            <input type="text" class="form-control" v-model="book.author" />
-          </div>
-          <div class="for-group">
-            <label>价格</label>
-            <!-- 双向绑定 -->
-            <input type="text" class="form-control" v-model="book.price" />
-          </div>
-          <button class="btn btn-primary btn-block" @:click="addBook">
-            添加
-          </button>
-        </div>
-      </div>
-    </div>
-    <script>
-      // Vue 是用来做单页应用的， app 启动vue 只做一次 接管 vue
-      var app = new Vue({
-        el: "#app",
-        data() {
-          return {
-            books: [
-              {
-                id: 1,
-                author: "红楼梦",
-                name: "曹雪芹",
-                price: 32.0,
-              },
-              {
-                id: 2,
-                author: "红楼梦",
-                name: "曹雪芹",
-                price: 32.0,
-              },
-              {
-                id: 3,
-                author: "红楼梦",
-                name: "曹雪芹",
-                price: 32.0,
-              },
-              {
-                id: 4,
-                author: "红楼梦",
-                name: "曹雪芹",
-                price: 32.0,
-              },
-            ],
-            book: {
-              //为了表单服务
-              id: 0,
-              name: "",
-              author: "",
-              price: "",
-            },
-            sortparam: "", //排序的类型
-
-            // title: "标题",
-          };
-        },
-        methods: {
-          addBook() {
-            // console.log(this.book);
-            // 维护数据页面会自动更新
-            this.book.id = this.books.length + 1;
-            this.books.push(this.book);
-            this.book = " ";
-          },
-          sortBy(sortparam) {
-            //支持所有type的排序
-            // mvvm 排序， this.books 排序
-            // arr.sort支持函数
-            this.sortparam = sortparam;
-            this.books.sort(function (a, b) {
-              let aVal = a[sortparam];
-              let bVal = b[sortparam];
-              if (typeof aVal == "number" && typeof bVal == "number") {
-                return aVal - bVal; //升序排序
-              } else {
-                return aVal.charCodeAt(0) - bVal.charCodeAt[0];
-              }
-            });
-          },
-        },
-      });
-    </script>
+    <noscript>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
   </body>
 </html>
